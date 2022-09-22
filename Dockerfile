@@ -20,6 +20,6 @@ RUN npm run build
 FROM nginx:1.17
 COPY nginx.conf /etc/nginx/nginx.conf
 WORKDIR /code
-COPY --from=BUILD /usr/src/app/dist .
+COPY --from=BUILD /src .
 EXPOSE 80:80
 CMD ["nginx", "-g", "daemon off;"]
