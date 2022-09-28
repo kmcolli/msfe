@@ -33,7 +33,6 @@ spec:
       pipelineRef:
         name: msfe
       serviceAccountName: pipeline
-      timeout: 1h0m0s
       workspaces:
         - name: workspace
           persistentVolumeClaim:
