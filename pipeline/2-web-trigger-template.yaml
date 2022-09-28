@@ -1,0 +1,40 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: charles-trigger-template
+spec:
+  params:
+  - name: git-repo-url
+    description: The git repository url
+  - name: git-revision
+    description: The git revision
+    default: master
+  - name: git-repo-name
+    description: The name of the deployment to be created / patched
+  - name: 
+
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      generateName: charles-pipeline-$(tt.params.git-repo-name)
+    spec:
+      params:
+        - name: APP_NAME
+          value: msfe
+        - name: GIT_REPO
+          value: 'https://github.com/kmcolli/msfe'
+        - name: GIT_REVISION
+          value: ''
+        - name: IMAGE_NAME
+          value: 'image-registry.openshift-image-registry.svc:5000/charles/msfe'
+        - name: PATH_CONTEXT
+          value: .
+      pipelineRef:
+        name: msfe
+      serviceAccountName: pipeline
+      timeout: 1h0m0s
+      workspaces:
+        - name: workspace
+          persistentVolumeClaim:
+            claimName: pvc-f05930976c
