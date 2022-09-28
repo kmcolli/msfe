@@ -17,6 +17,7 @@ RUN yarn
 COPY . ./
 RUN yarn build
  
+ 
 FROM nginx:alpine 
 # deploy specific nginx configuration file
 COPY nginx.conf /etc/nginx/nginx.conf
