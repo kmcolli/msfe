@@ -10,7 +10,7 @@
 #
 # docker run -i --rm -p 8081:8081 springboot/sample-demo
 ####
-FROM node:7.10 as BUILD
+FROM node:latest as BUILD
 WORKDIR /usr/src/app
 COPY package.json ./
 RUN yarn
